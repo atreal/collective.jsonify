@@ -383,6 +383,9 @@ class Wrapper(dict):
                     'FloatField', 'FixedPointField', 'TALESString',
                     'TALESLines', 'ZPTField', 'DataGridField', 'EmailField']:
 
+                if field.__name__ == 'Stichworte':
+                    continue
+
                 try:
                     value = field.getRaw(self.context)
                 except AttributeError:
