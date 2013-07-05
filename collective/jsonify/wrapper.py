@@ -519,7 +519,7 @@ class Wrapper(dict):
                         if ref.portal_type == "BernLink":
                             url = ref.remoteUrl()
                         else:
-                            url = ref.UID()
+                            url = 'resolveuid/%s' % ref.UID()
 
                         self[rel].append([title, url])
 
