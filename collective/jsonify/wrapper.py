@@ -505,6 +505,7 @@ class Wrapper(dict):
             return
         self['_atrefs'] = {}
         self['_atbrefs'] = {}
+        self['mehrZumThema'] = []
         relationships = self.context.getRelationships()
         for rel in relationships:
             self['_atrefs'][rel] = []
@@ -512,6 +513,16 @@ class Wrapper(dict):
             for ref in refs:
                 if ref is not None:
                     self['_atrefs'][rel].append('/'.join(ref.getPhysicalPath()))
+
+                    if rel == 'mehrZumThema':
+                        title = ref.Title()
+                        if ref.portal_type() == "BernLink":
+                            url = ref.remoteUrl()
+                        else:
+                            url = ref.UID()
+
+                        self[rel].append([title, url])
+
         brelationships = self.context.getBRelationships()
         for brel in brelationships:
             self['_atbrefs'][brel] = []
