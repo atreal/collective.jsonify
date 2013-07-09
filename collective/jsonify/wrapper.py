@@ -386,6 +386,13 @@ class Wrapper(dict):
                 if field.__name__ == 'Stichworte':
                     continue
 
+                if field.__name__ == 'creators':
+                    try:
+                        # See Archetypes/ExtensibleMetadata.py => listCreators
+                        self['creators'] = self.context.listCreators()
+                        continue
+                    except:
+                        pass
                 try:
                     value = field.getRaw(self.context)
                 except AttributeError:
