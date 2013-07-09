@@ -386,9 +386,9 @@ class Wrapper(dict):
                 if field.__name__ == 'Stichworte':
                     try:
                         self['Stichworte'] = field.get(self.context)
-                        continue
                     except:
-                        continue
+                        self['Stichworte'] = []
+                    continue
 
                 if field.__name__ == 'creators':
                     try:
