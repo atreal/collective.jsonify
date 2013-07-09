@@ -384,7 +384,11 @@ class Wrapper(dict):
                     'TALESLines', 'ZPTField', 'DataGridField', 'EmailField']:
 
                 if field.__name__ == 'Stichworte':
-                    continue
+                    try:
+                        self['Stichworte'] = field.get(self.context)
+                        continue
+                    except:
+                        continue
 
                 if field.__name__ == 'creators':
                     try:
