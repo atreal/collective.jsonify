@@ -385,7 +385,18 @@ class Wrapper(dict):
 
                 if field.__name__ == 'Stichworte':
                     try:
-                        self['Stichworte'] = field.get(self.context)
+                        stichworte = field.get(self.context)
+                        cleanup = []
+                        for stichwort in stichworte:
+                            try:
+                                # Some items are broken. We just check if
+                                # its possible to decode,
+                                stichwort.decode('utf-8')
+                                cleanup.append(stichwort)
+                            except UnicodeDecodeError:
+                                pass
+
+                        self['Stichworte'] = tuple(cleanup)
                     except:
                         self['Stichworte'] = []
                     continue
