@@ -539,7 +539,7 @@ class Wrapper(dict):
                     if rel == 'mehrZumThema':
                         title = ref.Title()
                         if ref.portal_type == "BernLink":
-                            url = ref.remoteUrl()
+                            url = ref.remoteUrl
                         else:
                             url = 'resolveuid/%s' % ref.UID()
 
