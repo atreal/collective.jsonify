@@ -8,7 +8,7 @@ try:
 except:
     import json
 
-from wrapper import Wrapper
+from speed_wrapper import SpeedWrapper
 
 
 def _clean_dict(dct, error):
@@ -26,7 +26,7 @@ def get_item(self):
     """
 
     try:
-        context_dict = Wrapper(self)
+        context_dict = SpeedWrapper(self)
     except Exception, e:
         tb = pprint.pformat(traceback.format_tb(sys.exc_info()[2]))
         return 'ERROR: exception wrapping object: %s\n%s' % (str(e), tb)
@@ -39,12 +39,15 @@ def get_item(self):
         except Exception, error:
             if "serializable" in str(error):
                 key, context_dict = _clean_dict(context_dict, error)
-                pprint.pprint('Not serializable member %s of %s ignored'
-                     % (key, repr(self)))
+                pprint.pprint(
+                    'Not serializable member %s of %s ignored' %
+                    (key, repr(self))
+                )
                 passed = False
             else:
-                return ('ERROR: Unknown error serializing object: %s' %
-                    str(error))
+                return (
+                    'ERROR: Unknown error serializing object: %s' % str(error)
+                )
 
     return JSON
 
